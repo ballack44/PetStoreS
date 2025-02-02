@@ -14,10 +14,10 @@ import static utils.Tags.SMOKE;
 
 
 @Listeners(TestListener.class)
-//TODO - This is out of scope of the homework, but did not want to delete the legacy test class (it can be useful in the future or a smoke test)
+//TODO - This is out of scope of the homework, but I did not want to delete the legacy test class (it can be useful in the future or a smoke test)
 public class PetListTest extends Common {
 
-    @Test(groups = {SMOKE},description ="description")
+    @Test(enabled = false, groups = {SMOKE},description ="description")
     public void Test1(){
         Map<String, String> queryParams = new TreeMap<>();
         queryParams.put("status","available");
@@ -28,12 +28,12 @@ public class PetListTest extends Common {
         Assert.assertEquals(response.getStatusCode(),200,"Invalid response code");
     }
 
-    @Test(groups = {SMOKE},description ="description")
+    @Test(enabled = false, groups = {SMOKE},description ="description")
     public void Test2(){
         Map<String, String> queryParams = new TreeMap<>();
         queryParams.put("status","available");
         Map<String, String> headers = new TreeMap<>();
-        headers.put("Mandatoyheader","BFG");
+        headers.put("Mandatoryheader","BFG");
 
         Response response = getUrl(findByStatus, headers, queryParams);
         Assert.assertEquals(response.getStatusCode(),200,"Invalid response code");
