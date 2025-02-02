@@ -77,15 +77,15 @@ public class Reporter {
     public void addResult(ITestResult result) {
         switch (result.getStatus()) {
             case 2:
-                this.left.fail("\ud83d\udc7f  " + result.getThrowable().getMessage() + " \ud83d\ude25");
+                this.left.fail("\uD83E\uDDDF  " + result.getThrowable().getMessage() + " \uD83D\uDE35");
                 this.right.fail(result.getThrowable().getMessage());
                 break;
             case 3:
                 this.extent.removeTest(this.right);
-                this.left.skip("\ud83d\ude33  " + result.getThrowable().getMessage() + "  \ud83d\ude48");
+                this.left.skip("\u274C" + result.getThrowable().getMessage() + "  \uD83D\uDE35");
                 break;
             default:
-                this.left.pass("\ud83e\udd73 Test passed! \ud83c\udf89");
+                this.left.pass("\u2705 Test passed! \ud83c\udf89");
         }
 
         this.extent.flush();

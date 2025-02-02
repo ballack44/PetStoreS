@@ -4,15 +4,15 @@ import com.example.sandbox.util.swagger.definitions.PetBody;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
+import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
 @SuperBuilder
 @Getter
+@Setter
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class PostCreatePet extends  JsonBody{
+public class PostCreatePet extends JsonBody{
 
         @JsonProperty
-        private PetBody PetBody;
-
-
+        private PetBody petBody;
 }

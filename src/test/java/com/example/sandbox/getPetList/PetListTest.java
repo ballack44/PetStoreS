@@ -10,31 +10,32 @@ import utils.report.TestListener;
 import java.util.Map;
 import java.util.TreeMap;
 
-import static com.example.sandbox.util.constans.Tags.SMOKE;
+import static utils.Tags.SMOKE;
 
 
 @Listeners(TestListener.class)
-public class petListTest extends Common {
+//TODO - This is out of scope of the homework, but did not want to delete the legacy test class (it can be useful in the future or a smoke test)
+public class PetListTest extends Common {
 
-    @Test(enabled = true,groups = {SMOKE},description ="description")
+    @Test(groups = {SMOKE},description ="description")
     public void Test1(){
         Map<String, String> queryParams = new TreeMap<>();
         queryParams.put("status","available");
         queryParams.put("asd","asd");
         queryParams.put("maki","kakadu");
 
-        Response  response = getUrl(findByStatus, queryParams);
+        Response response = getUrl(findByStatus, queryParams);
         Assert.assertEquals(response.getStatusCode(),200,"Invalid response code");
     }
 
-    @Test(enabled = true,groups = {SMOKE},description ="description")
+    @Test(groups = {SMOKE},description ="description")
     public void Test2(){
         Map<String, String> queryParams = new TreeMap<>();
         queryParams.put("status","available");
         Map<String, String> headers = new TreeMap<>();
         headers.put("Mandatoyheader","BFG");
 
-        Response  response = getUrl(findByStatus,headers,queryParams);
+        Response response = getUrl(findByStatus, headers, queryParams);
         Assert.assertEquals(response.getStatusCode(),200,"Invalid response code");
 
     }

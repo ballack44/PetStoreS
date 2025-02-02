@@ -2,7 +2,7 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="Suite" parallel="false">
     <test name="Test">
-        <method-selectors>
+        <!--<method-selectors>
             <method-selector>
                 <script language="groovy">
                     <![CDATA[suiteName = System.getProperty("group");
@@ -11,7 +11,9 @@
                 </script>
             </method-selector>
         </method-selectors>
-        <!--
+       -->
+
+       <!--
        *********************************************************************
        Define the packages to be included(Run suite package wise.)
        *********************************************************************
