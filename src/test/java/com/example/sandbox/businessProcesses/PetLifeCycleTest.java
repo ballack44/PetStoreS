@@ -16,8 +16,8 @@ import static utils.Tags.LIFECYCLE;
 @Listeners(TestListener.class)
 public class PetLifeCycleTest extends Common {
 
-    @Test(groups = {LIFECYCLE},description ="description")
-    public void Test1(){
+    @Test(groups = {LIFECYCLE},description ="Lifecycle test for pet (create,update,getById,delete,getById)")
+    public void petLifeCycleTest(){
         //create a dummy pet
         Response response = postUrl(newPet, createJsonBody(TestData.testPet));
         Assertions.assertReturnCode(response, 200);
