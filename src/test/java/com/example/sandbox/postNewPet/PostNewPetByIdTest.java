@@ -16,7 +16,7 @@ import static utils.Tags.POST;
 
 @Listeners(TestListener.class)
 public class PostNewPetByIdTest extends Common {
-    private static final int PET_ID = TestData.testPet.getPetBody().getId();
+    private static final String PET_ID = String.valueOf(TestData.testPet.getPetBody().getId());
 
     //OK
     @Test(groups = {POST},description ="Positive test for POST /pet/{petID}")
@@ -27,18 +27,19 @@ public class PostNewPetByIdTest extends Common {
 
         String newName = "NewXXX";
         Map<String, String> formParams = new TreeMap<>();
-        formParams.put("id", "" + PET_ID);
+        formParams.put("id", PET_ID);
         formParams.put("name", newName);
         formParams.put("status", PetStatus.SOLD.getStatus());
 
         //update the existing dummy pet
-        Response postResponse = postUrl("/pet/" + PET_ID, formParams);
+
+        Response postResponse = postUrl(petById.replace("{petId}", PET_ID), formParams);
         Assertions.assertReturnCode(postResponse, 200);
         Assertions.assertResponseTime(postResponse, 1500);
 
         //double check the update with GET (not required in theHW)
-        Response getResponse = getUrl("/pet/" + PET_ID);
-        getResponse.then().body("id", equalTo(PET_ID));
+        Response getResponse = getUrl(petById.replace("{petId}", PET_ID));
+        getResponse.then().body("id", equalTo(Integer.parseInt(PET_ID)));
         getResponse.then().body("name", equalTo(newName));
 
     }

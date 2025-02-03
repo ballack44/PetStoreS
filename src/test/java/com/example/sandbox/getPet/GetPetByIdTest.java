@@ -19,13 +19,13 @@ public class GetPetByIdTest extends Common {
     //OK
     @Test(groups = {GET},description ="Positive test for GET /pet/{petId}")
     public void testGetPetById_Success() {
-        int PET_ID = TestData.testPet.getPetBody().getId();
+        final String PET_ID = String.valueOf(TestData.testPet.getPetBody().getId());
         //create a dummy pet
         Response response = postUrl(newPet, createJsonBody(TestData.testPet));
         Assertions.assertReturnCode(response, 200);
 
-        Response getResponse = getUrl("/pet/" + PET_ID);
-        getResponse.then().body("id", equalTo(PET_ID));
+        Response getResponse = getUrl(petById.replace("{petId}", PET_ID));
+        getResponse.then().body("id", equalTo(Integer.parseInt(PET_ID)));
 
         Assertions.assertReturnCode(getResponse, 200);
         Assertions.assertResponseTime(getResponse, 1500);
@@ -50,8 +50,8 @@ public class GetPetByIdTest extends Common {
     //OK
     @Test(groups = {GET},description ="Negative test for GET /pet/{petId} with an invalid petID")
     public void testGetPetById_NotFound() {
-        final int PET_ID = Integer.MAX_VALUE;
-        Response response = getUrl("/pet/" + PET_ID);
+        final String PET_ID = String.valueOf(Integer.MAX_VALUE);
+        Response response = getUrl(petById.replace("{petId}", PET_ID));
 
         Assert.assertTrue(response.asString().contains("Pet not found"), "Error message does not match");
         Assertions.assertReturnCode(response, 404);

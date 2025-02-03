@@ -33,23 +33,20 @@ public class PetLifeCycleTest extends Common {
         Assertions.assertReturnCode(putResponse, 200);
         Assertions.assertResponseTime(putResponse, 1500);
 
-        Response response2 = getUrl(petById.replace("{petId}",id));
-        Assertions.assertReturnCode(response2, 200);
-
         //check modification with GET method
-        Response responseGet = getUrl("/pet/" + id);
+        Response responseGet = getUrl(petById.replace("{petId}",id));
         Assert.assertEquals((int)responseGet.jsonPath().get("id"), Integer.parseInt(id), "Wrong ID in the response");
         Assert.assertEquals(responseGet.jsonPath().get("name"), newName, "Wrong name in the response");
         Assertions.assertReturnCode(responseGet, 200);
         Assertions.assertResponseTime(responseGet, 1500);
 
         //delete
-        Response deleteResponse = deleteUrl("/pet/" + id);
+        Response deleteResponse = deleteUrl(petById.replace("{petId}",id));
         Assertions.assertReturnCode(deleteResponse, 200);
         Assertions.assertResponseTime(deleteResponse, 1500);
 
         //check deletion with GET method
-        responseGet = getUrl("/pet/" + id);
+        responseGet = getUrl(petById.replace("{petId}",id));
         Assert.assertNull(responseGet.jsonPath().get("id"), "The ID exists in the response");
         Assert.assertNull(responseGet.jsonPath().get("name"), "The name exists in the response");
         Assert.assertEquals(responseGet.jsonPath().get("message"), "Pet not found", "Error message does not match");
