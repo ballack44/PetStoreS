@@ -15,7 +15,7 @@ import java.util.TreeMap;
 import static utils.Tags.GET;
 
 @Listeners(TestListener.class)
-public class PetByStatusTest extends Common {
+public class GetPetByStatusTest extends Common {
 
     //OK
     @Test(groups = {GET},description ="Positive test GET /pet/findByStatus (Find pets by status)")

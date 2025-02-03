@@ -23,7 +23,7 @@ public class PostNewPetTest extends Common {
     }
 
     //TODO the test shall not pass
-    //REASON: the server shall not accept invalid pet data (missing values, unsupported status type etc.)
+    //REASON: the server shall not accept invalid pet data (missing mandatory values, unsupported status type etc.)
     //POTENTIAL BUG
     @Test(enabled = false, groups = {POST},description ="Negative test for POST /pet/")
     public void testPostNewPet_Negative(){

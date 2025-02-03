@@ -15,7 +15,7 @@ import static utils.Tags.GET;
 import static org.hamcrest.Matchers.equalTo;
 
 @Listeners(TestListener.class)
-public class PetByIdTest extends Common {
+public class GetPetByIdTest extends Common {
     //OK
     @Test(groups = {GET},description ="Positive test for GET /pet/{petId}")
     public void testGetPetById_Success() {

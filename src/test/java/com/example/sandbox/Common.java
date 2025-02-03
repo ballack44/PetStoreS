@@ -37,10 +37,8 @@ public class Common extends Endpoints {
 
         return given()
                 .relaxedHTTPSValidation()
-                .headers("correlationId","testCorrelid")
-                .cookie("session_id", "abc123")
-                .param("param","testParam")
-                .formParam("asd","testFormParams")
+                //.headers("correlationId","testCorrelid") //it is not neccessary
+                //.cookie("session_id", "abc123") //it is not neccessary
                 .queryParams(queryParam)
                 .and()
                 .filter(filter)
@@ -54,7 +52,7 @@ public class Common extends Endpoints {
 
         return given()
                 .relaxedHTTPSValidation()
-                .params(queryParam)
+                .queryParams(queryParam)
                 .headers(headers)
                 .and()
                 .filter(filter)
@@ -85,7 +83,7 @@ public class Common extends Endpoints {
 
         return given()
                 .relaxedHTTPSValidation()
-                .contentType("application/json; charset=UTF-8")
+                .contentType(ContentType.URLENC)
                 .formParams(formParams)
                 .and()
                 .filter(filter)
@@ -151,5 +149,21 @@ public class Common extends Endpoints {
                 .then()
                 .extract().response();
     }
+
+    // header parameter to an optional api_key attribute
+    /*
+    public Response deleteUrl(String endpoint, String header){
+        return given()
+                .relaxedHTTPSValidation()
+                .header(new Header("api_key", header))
+                .contentType("application/json; charset=UTF-8")
+                .and()
+                .filter(filter)
+                .when()
+                .delete(baseUrl + endpoint)
+                .then()
+                .extract().response();
+    }
+     */
 }
 

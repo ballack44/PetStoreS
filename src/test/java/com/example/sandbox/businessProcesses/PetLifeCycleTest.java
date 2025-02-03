@@ -28,6 +28,7 @@ public class PetLifeCycleTest extends Common {
         TestData.testPet.getPetBody().setStatus(String.valueOf(PetStatus.SOLD));
 
         //update the existing dummy pet
+        // (just for the sake of interest use PUT instead of POST /pet/{testID}
         Response putResponse = putUrl("/pet", createJsonBody(TestData.testPet));
         Assertions.assertReturnCode(putResponse, 200);
         Assertions.assertResponseTime(putResponse, 1500);
@@ -52,8 +53,8 @@ public class PetLifeCycleTest extends Common {
         Assert.assertNull(responseGet.jsonPath().get("id"), "The ID exists in the response");
         Assert.assertNull(responseGet.jsonPath().get("name"), "The name exists in the response");
         Assert.assertEquals(responseGet.jsonPath().get("message"), "Pet not found", "Error message does not match");
-        Assertions.assertReturnCode(response, 200);  //TODO - it shall be 404
-        Assertions.assertResponseTime(response, 1500);
+        Assertions.assertReturnCode(responseGet, 404);
+        Assertions.assertResponseTime(responseGet, 1500);
 
     }
 }

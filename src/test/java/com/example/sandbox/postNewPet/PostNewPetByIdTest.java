@@ -11,50 +11,51 @@ import utils.report.TestListener;
 import java.util.Map;
 import java.util.TreeMap;
 import static com.example.sandbox.util.body.pet.JsonBody.createJsonBody;
+import static org.hamcrest.Matchers.equalTo;
 import static utils.Tags.POST;
 
 @Listeners(TestListener.class)
 public class PostNewPetByIdTest extends Common {
     private static final int PET_ID = TestData.testPet.getPetBody().getId();
 
-    //TODO
-    //PROBLEM: the response contains error code 415
-    //the following response
-    /*
-        The response has the following content which I think is not the desired:
-        <apiResponse>
-            <type>unknown</type>
-        </apiResponse>
-     */
+    //OK
     @Test(groups = {POST},description ="Positive test for POST /pet/{petID}")
     public void testPostNewPetById_Success(){
         //create a dummy pet
         Response response = postUrl(newPet, createJsonBody(TestData.testPet));
         Assertions.assertReturnCode(response, 200);
 
+        String newName = "NewXXX";
         Map<String, String> formParams = new TreeMap<>();
         formParams.put("id", "" + PET_ID);
-        formParams.put("name","NewXXX");
+        formParams.put("name", newName);
         formParams.put("status", PetStatus.SOLD.getStatus());
 
         //update the existing dummy pet
         Response postResponse = postUrl("/pet/" + PET_ID, formParams);
-        Assertions.assertReturnCode(postResponse, 415); //TODO bug: it shall be 200 (OK)
+        Assertions.assertReturnCode(postResponse, 200);
         Assertions.assertResponseTime(postResponse, 1500);
+
+        //double check the update with GET (not required in theHW)
+        Response getResponse = getUrl("/pet/" + PET_ID);
+        getResponse.then().body("id", equalTo(PET_ID));
+        getResponse.then().body("name", equalTo(newName));
 
     }
 
-    //TODO as the previous problem above
+    //OK
     @Test(groups = {POST},description ="Negative test for POST /pet/{petID} with invalid petId")
     public void testPostNewPetById_Invalid(){
         Map<String, String> formParams = new TreeMap<>();
+
         formParams.put("id","XXX");
         formParams.put("name","NewXXX");
         formParams.put("status", PetStatus.AVAILABLE.getStatus());
 
-        Response response = postUrl("/pet/" + PET_ID, formParams);
+        //invalid ID
+        Response response = postUrl("/pet/XXX", formParams);
 
-        Assertions.assertReturnCode(response, 415); //TODO bug: it shall be 200 (OK)
+        Assertions.assertReturnCode(response, 404);
         Assertions.assertResponseTime(response, 2000);
 
     }
