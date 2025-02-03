@@ -29,7 +29,7 @@ public class PetLifeCycleTest extends Common {
 
         //update the existing dummy pet
         // (just for the sake of interest use PUT instead of POST /pet/{testID}
-        Response putResponse = putUrl("/pet", createJsonBody(TestData.testPet));
+        Response putResponse = putUrl(newPet, createJsonBody(TestData.testPet));
         Assertions.assertReturnCode(putResponse, 200);
         Assertions.assertResponseTime(putResponse, 1500);
 
