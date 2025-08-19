@@ -1,4 +1,5 @@
-## API Testing Assignment
+## API Testing Assignment 
+API documentation: https://petstore.swagger.io/
 # Task 1 – Endpoint Testing
 
 * Extend the provided project with additional test cases for the already implemented endpoints (based on the documentation).
